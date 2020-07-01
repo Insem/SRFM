@@ -110,6 +110,7 @@ export default {
 </script>
 <style lang="scss">
 @import "~/assets/css/vars.scss";
+
 .container {
   .smallNews_block {
     margin-top: 95px;
