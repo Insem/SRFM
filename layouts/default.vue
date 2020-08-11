@@ -1,12 +1,24 @@
 <template>
-  <div>
-    <nuxt/>
+  <div class="main_cont">
+    <App-Header />
+    <nuxt />
+    <App-Footer />
   </div>
 </template>
-
+<script>
+import AppHeader from "~/components/page-parts/Header.vue";
+import AppFooter from "~/components/page-parts/Footer.vue";
+export default {
+  components: {
+    AppHeader,
+    AppFooter,
+  },
+};
+</script>
 <style>
 html {
-  font-family: "Source Sans Pro", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-family: "Source Sans Pro", -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Roboto, "Helvetica Neue", Arial, sans-serif;
   font-size: 16px;
   word-spacing: 1px;
   -ms-text-size-adjust: 100%;
@@ -16,7 +28,9 @@ html {
   box-sizing: border-box;
 }
 
-*, *:before, *:after {
+*,
+*:before,
+*:after {
   box-sizing: border-box;
   margin: 0;
 }

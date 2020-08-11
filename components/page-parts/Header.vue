@@ -1,5 +1,5 @@
 <template>
-  <header id="scene" class="red">
+  <header class="red">
     <Logo />
     <div class="menu">
       <div class="elem" v-for="menu in menuArr" v-bind:key="menu.id">
@@ -19,9 +19,9 @@
 @import "~/assets/css/vars.scss";
 
 header {
-  position: relative;
+  //position: relative;
   //background: url("/fon_bw.png") no-repeat 0% 40%;
-  background-size: cover;
+  //background-size: cover;
   font-family: $inter;
   width: 100%;
   height: $header_height;
@@ -30,7 +30,7 @@ header {
   justify-content: space-between;
   flex-direction: row;
   margin-top: 55px;
-
+  //box-sizing: content-box;
   .menu {
     display: flex;
     justify-content: start;
@@ -78,7 +78,6 @@ header {
 }
 </style>
 <script>
-import Parallax from "parallax-js";
 import Logo from "./Logo.vue";
 import MenuElement from "./MenuElement.vue";
 export default {
@@ -88,14 +87,14 @@ export default {
         { id: 0, text: "Главная", active: true },
         { id: 1, text: "Истории", active: false },
         { id: 2, text: "Источники", active: false },
-        { id: 3, text: "Подкасты", active: false }
-      ]
+        { id: 3, text: "Подкасты", active: false },
+      ],
     };
   },
   components: {
     Logo,
-    MenuElement
+    MenuElement,
   },
-  mounted() {}
+  mounted() {},
 };
 </script>

@@ -1,0 +1,121 @@
+<template>
+  <div class="main_cont">
+    <div class="container">
+      <App-Header />
+      <div class="tags">
+        <h2>ТЕГИ НОВОСТЕЙ:</h2>
+        <div class="tag_content">
+          <Tag
+            v-for="tag in tags"
+            :key="tag.id"
+            v-on:click.native="active(tag)"
+            :tag="tag"
+            :color="tag.active?'rgb(46, 46, 46)':'black'"
+          />
+        </div>
+        <hr />
+
+        <h2>НОВОСТИ ПО ТЕГАМ:</h2>
+        <div class="posts">
+          <Small-Post
+            v-for="post in posts"
+            :key="post.id"
+            :tag="getTagById(post.tags[0])"
+            :news="post"
+            :type="'SmallPost'"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+<style lang="scss">
+@import "~/pages/post-navigation/css/main.scss";
+</style>
+<script>
+import Api from "~/assets/js/api/fetch.js";
+import parsePost from "~/assets/js/write-post/parsePosts.js";
+import SmallPost from "~/components/news/SmallPost.vue";
+import Tag from "~/components/news/news-parts/Tag.vue";
+
+import AppHeader from "~/components/page-parts/Header.vue";
+import AppFooter from "~/components/page-parts/Footer.vue";
+const api = Api.ApiPath;
+
+const CONSTS = require("~/assets/js/frontend.consts.js");
+export default {
+  components: {
+    SmallPost,
+    Tag,
+    AppFooter,
+    AppHeader,
+  },
+  data() {
+    return {
+      tags: [],
+      posts: [],
+    };
+  },
+  methods: {
+    async build() {
+      console.log("mounted", this.$route.query.tags);
+      const tags = [];
+      const rowTags = this.$route.query.tags.split(",");
+      rowTags.forEach((it) => {
+        const tag = parseInt(it);
+        if (!isNaN(tag) && this.tags[tag]) {
+          tags.push(this.getTagById(tag));
+        }
+      });
+      console.log("Uri tags", tags);
+      if (tags.length != 0) {
+        tags.forEach((el) => {
+          this.active(el);
+        });
+      } else {
+        console.log(
+          "Uri tags wasnt defined",
+          tags,
+          this.tags.length,
+          this.posts.length
+        );
+
+        this.posts = this.searchPosts({});
+      }
+    },
+    async searchPosts(query) {
+      return await Api.GetReq(CONSTS.PATHS.GETPOST, query);
+    },
+    async active(tag) {
+      this.$set(tag, "active", !tag.active);
+      let search = { $and: [] };
+
+      this.tags.forEach((it) => {
+        if (it.active) {
+          search.$and.push({ tags: { $in: [it.id] } });
+        }
+      });
+      console.log("search", search);
+      if (!search.$and.length) search = {};
+
+      this.posts = await this.searchPosts(search);
+      console.log("Posts", this.posts);
+    },
+    getTagById(id) {
+      for (let i = 0; i < this.tags.length; i++) {
+        if (this.tags[i].id == id) return this.tags[i];
+      }
+      //throw err
+    },
+  },
+  async beforeCreate() {
+    const data = await Api.GetReq(CONSTS.PATHS.GETTAGS, {});
+    data.forEach((it) => {
+      it.active = false;
+    });
+    this.tags = data;
+    await this.build();
+    console.log("Tags", this.tags);
+  },
+};
+</script>

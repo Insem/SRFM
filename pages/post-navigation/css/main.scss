@@ -1,0 +1,37 @@
+.tags {
+  padding-top: 40px;
+
+  h2 {
+    color: white;
+    padding-bottom: 25px;
+  }
+
+  hr {
+    width: 100%;
+    background-color: rgb(46, 46, 46);
+    border: none;
+    height: 1px;
+    margin: 35px 0px;
+  }
+
+  .tag_content {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+
+    .tag {
+      margin-right: 10px;
+    }
+  }
+
+  .posts>div {
+    margin-right: 15px;
+  }
+
+  .posts {
+    display: flex;
+    justify-content: start;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+}

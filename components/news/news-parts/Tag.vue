@@ -1,8 +1,10 @@
 <template>
-  <div class="tag" :style="{backgroundColor:color}">
-    <h3>{{text}}</h3>
-    <img src="~/assets/img/svg/tag_arr.svg" alt="Перейти" />
-  </div>
+  <router-link :to="'/post-navigation?tags='+tag.id">
+    <div class="tag" :style="{backgroundColor:color}">
+      <h3>{{tag.val}}</h3>
+      <img src="~/assets/img/svg/tag_arr.svg" alt="Перейти" />
+    </div>
+  </router-link>
 </template>
 <style lang="scss">
 .tag {
@@ -29,8 +31,9 @@
 <script>
 export default {
   props: {
-    text: String,
-    color: String
-  }
+    tag: Object,
+    color: String,
+    link: Boolean,
+  },
 };
 </script>

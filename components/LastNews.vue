@@ -1,10 +1,10 @@
 <template>
   <div class="news">
     <h2>Последнее</h2>
-    <div class="cont" v-for="(the_news, i) in news" v-bind:key="i">
+    <div class="cont" v-for="post in last" v-bind:key="post.id">
       <div class="block">
         <h3>
-          {{the_news.title}}
+          {{post.header}}
           <!--<div class="arr">
             <div>
               <img src="~/assets/img/svg/news_arr.svg" alt="Перейти к публикации" />
@@ -15,19 +15,29 @@
       <div class="date">
         <h4>
           <img src="~/assets/img/svg/clock.svg" alt="Время публикации" />
-          {{the_news.date}}
+          {{toDate(post.time)}}
         </h4>
       </div>
     </div>
     <div class="tags">
-      <div class="tag" v-for="(tag, id) in tags" v-bind:key="id">
-        <h3>{{tag.title}}</h3>
-        <h2>{{tag.count}}</h2>
+      <div class="tag" v-for="tag in tags" v-bind:key="tag.id">
+        <h3>{{tag.val}}</h3>
+        <!--<h2>{{tag.count}}</h2>-->
         <img src="~/assets/img/svg/tag_arr.svg" alt />
       </div>
     </div>
   </div>
 </template>
+
+<script>
+import toDate from "~/assets/js/GetDate.js";
+export default {
+  methods: {
+    toDate,
+  },
+  props: { last: Array, tags: Array },
+};
+</script>
 <style lang="scss">
 .news {
   width: 300px;
@@ -123,48 +133,3 @@
   }
 }
 </style>
-<script>
-export default {
-  data() {
-    return {
-      news: [
-        {
-          title: "Житель Калининграда сварился заживо в отделении полиции",
-          date: "Февраль 2020"
-        },
-        {
-          title: "Трое полицейских изнасиловали свою коллегу",
-          date: "Декабрь 2019"
-        },
-        {
-          title: "Полицейские пытали электрошокером многодетную мать",
-          date: "Январь 2016"
-        },
-        {
-          title: "В Саратове полицейские прижигали ягодицы задержанного утюгом",
-          date: "Сентябрь 2018"
-        },
-        {
-          title: "Полицейские избили подростка",
-          date: "Май 2019"
-        }
-      ],
-      tags: [
-        {
-          title: "Пытки",
-          count: "20"
-        },
-        {
-          title: "Заключения",
-          count: "18"
-        },
-        {
-          title: "Пензенское дело",
-          count: "6"
-        }
-      ]
-    };
-  }
-  //props: { news: Array }
-};
-</script>

@@ -1,11 +1,11 @@
 <template>
-  <div class="date">
-    <img src="~/assets/img/svg/clock.svg" alt="Время публикации" />
-    {{toDate(time) }}
+  <div class="author">
+    <img src="~/assets/img/svg/Person.svg" alt="Время публикации" />
+    {{author}}
   </div>
 </template>
 <style lang="scss">
-.date h3 {
+.author h3 {
   padding: 15px 0px;
   font-family: Inter;
   font-style: normal;
@@ -14,14 +14,14 @@
   line-height: 120.5%;
   color: #949494;
 }
-.date {
+.author {
   display: flex;
   flex-direction: row;
   align-items: center;
   color: #949494;
   margin-right: 13px;
 }
-.date img {
+.author img {
   height: 12px;
   margin-right: 5px;
   margin-bottom: 3px;
@@ -29,13 +29,9 @@
 </style>
 
 <script>
-import toDate from "~/assets/js/GetDate.js";
 export default {
   props: {
-    time: Number,
-  },
-  methods: {
-    toDate,
-  },
+    author: String
+  }
 };
 </script>

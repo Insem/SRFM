@@ -9,7 +9,7 @@
   font-family: Inter;
   font-style: normal;
   font-weight: normal;
-  font-size: 12px;
+  font-size: 14px;
   line-height: 120.5%;
   color: #949494;
   margin-right: 13px;
@@ -20,7 +20,7 @@
   align-items: center;
 }
 .views img {
-  height: 8px;
+  height: 10px;
   margin-right: 5px;
 }
 </style>
