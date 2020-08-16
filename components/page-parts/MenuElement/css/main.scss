@@ -1,35 +1,13 @@
-<template>
-  <div class="menu_main">
-    <div class="menu_content">
-      <div class="menu_elem">
-        <div
-          @click="activeClass"
-          class="block"
-          v-bind:class="{
-            active: menu.active,
-            unactive: !menu.active && unstart,
-            start: !unstart && !menu.active,
-            activeStart: menu.active && !unstart
-          }"
-        >
-          <div class="text">{{ menu.text }}</div>
-        </div>
-      </div>
-    </div>
-  </div>
-</template>
-<style lang="scss">
 @import "~/assets/css/vars.scss";
 $center_x: 10px;
 $center_y: 9px;
 $border: 3px;
-$animation_time: 0.2s;
-$animation_duration: 0.4s;
-$TDU: 0.15s;
-$TDA: 0.5s;
+$animation_time: 0.3s;
+$animation_duration: 0.5s;
+$TDU: 0.25s;
+$TDA: 0.6s;
 
-.menu_main {
-}
+.menu_main {}
 
 .menu_content {
   position: relative;
@@ -54,6 +32,7 @@ $TDA: 0.5s;
     //x 10
     //y 9
     .text {
+      color: white;
       z-index: 3;
       position: relative;
       background-color: #1b1b1b;
@@ -75,8 +54,11 @@ $TDA: 0.5s;
     height: 0px;
     width: 0px;
     padding: 0px;
+    animation: none;
+    transition: none;
   }
 
+  /*
   .block.activeStart:before {
     animation-duration: 0s !important;
   }
@@ -85,19 +67,17 @@ $TDA: 0.5s;
     transition-duration: 0s !important;
   }
 
+  .block.activeStart:after {
+    transition-duration: 0s !important;
+  }
+*/
   .block.active .text {
     transition-delay: $TDA;
     top: $border;
     left: $border;
   }
 
-  .block.unactive .text {
-    transition-delay: $TDU;
-  }
 
-  .block.activeStart:after {
-    transition-duration: 0s !important;
-  }
 
   .block:after {
     z-index: 2;
@@ -138,6 +118,11 @@ $TDA: 0.5s;
     animation-delay: $TDA;
     height: 100%;
     width: 100%;
+    display: block;
+  }
+
+  .block.unactive .text {
+    transition-delay: $TDU;
   }
 
   .block.active:before {
@@ -176,43 +161,18 @@ $TDA: 0.5s;
   60% {
     height: 80%;
     width: 60%;
+    opacity: 0.9;
+  }
+
+  80% {
+    opacity: 0.5;
   }
 
   100% {
     height: 0px;
     width: 0px;
     padding: 0px;
+    display: none !important;
+    opacity: 0;
   }
 }
-</style>
-
-<script>
-export default {
-  props: {
-    menu: Object,
-    arr: Array
-  },
-  data() {
-    return {
-      unstart: false
-    };
-  },
-  mounted() {
-    console.log(this.arr, this.menu);
-  },
-  methods: {
-    activeClass() {
-      this.arr.forEach(it => {
-        if (it.active) this.$set(it, "active", false);
-      });
-
-      if (!this.menu.active && (this.unstart || !this.unstart)) {
-        this.menu.active = true;
-      } else {
-        this.menu.active = false;
-      }
-      this.unstart = true;
-    }
-  }
-};
-</script>

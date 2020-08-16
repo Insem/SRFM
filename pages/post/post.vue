@@ -61,6 +61,13 @@ export default {
     if (!route.query.id || route.query.id == "") redirect("/404");
     return true;
   },
+  beforeRouteEnter(to, from, next) {
+    next((vm) => {
+      vm.$store.dispatch("activePost");
+
+      vm.$store.dispatch("randPost");
+    });
+  },
   beforeMount() {
     console.log("this", this.postData);
   },

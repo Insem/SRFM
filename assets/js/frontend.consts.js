@@ -15,6 +15,9 @@ module.exports = {
       },
       get UPDATEVIEWS() {
         return "/api/updateViews";
+      },
+      get GETRANDPOST() {
+        return "/api/getRandPostId";
       }
     }
   }

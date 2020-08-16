@@ -8,11 +8,11 @@ function getPost(req, res) {
   get_from_db(req.body)
     .then((doc) => {
       res.status(200);
-      console.log('got', doc);
+      console.log('User got post. Id: ', doc.id);
       res.end(JSON.stringify(doc));
     })
     .catch((e) => {
-      console.log('Error');
+      console.log('Error happened with getting post.', e);
       res.status(500);
       res.end('Error');
     });

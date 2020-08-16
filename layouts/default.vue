@@ -1,12 +1,12 @@
 <template>
   <div class="main_cont">
     <App-Header />
-    <nuxt />
+    <nuxt keep-alive />
     <App-Footer />
   </div>
 </template>
 <script>
-import AppHeader from "~/components/page-parts/Header.vue";
+import AppHeader from "~/components/page-parts/Header/Header.vue";
 import AppFooter from "~/components/page-parts/Footer.vue";
 export default {
   components: {

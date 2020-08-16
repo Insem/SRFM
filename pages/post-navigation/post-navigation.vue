@@ -1,30 +1,27 @@
 <template>
-  <div class="main_cont">
-    <div class="container">
-      <App-Header />
-      <div class="tags">
-        <h2>ТЕГИ НОВОСТЕЙ:</h2>
-        <div class="tag_content">
-          <Tag
-            v-for="tag in tags"
-            :key="tag.id"
-            v-on:click.native="active(tag)"
-            :tag="tag"
-            :color="tag.active?'rgb(46, 46, 46)':'black'"
-          />
-        </div>
-        <hr />
+  <div class="container">
+    <div class="tags">
+      <h2>ТЕГИ НОВОСТЕЙ:</h2>
+      <div class="tag_content">
+        <Tag
+          v-for="tag in tags"
+          :key="tag.id"
+          v-on:click.native="active(tag)"
+          :tag="tag"
+          :color="tag.active?'rgb(46, 46, 46)':'black'"
+        />
+      </div>
+      <hr />
 
-        <h2>НОВОСТИ ПО ТЕГАМ:</h2>
-        <div class="posts">
-          <Small-Post
-            v-for="post in posts"
-            :key="post.id"
-            :tag="getTagById(post.tags[0])"
-            :news="post"
-            :type="'SmallPost'"
-          />
-        </div>
+      <h2>НОВОСТИ ПО ТЕГАМ:</h2>
+      <div class="posts">
+        <Small-Post
+          v-for="post in posts"
+          :key="post.id"
+          :tag="getTagById(post.tags[0])"
+          :news="post"
+          :type="'SmallPost'"
+        />
       </div>
     </div>
   </div>
@@ -38,8 +35,6 @@ import parsePost from "~/assets/js/write-post/parsePosts.js";
 import SmallPost from "~/components/news/SmallPost.vue";
 import Tag from "~/components/news/news-parts/Tag.vue";
 
-import AppHeader from "~/components/page-parts/Header.vue";
-import AppFooter from "~/components/page-parts/Footer.vue";
 const api = Api.ApiPath;
 
 const CONSTS = require("~/assets/js/frontend.consts.js");
@@ -47,8 +42,6 @@ export default {
   components: {
     SmallPost,
     Tag,
-    AppFooter,
-    AppHeader,
   },
   data() {
     return {
@@ -56,11 +49,16 @@ export default {
       posts: [],
     };
   },
+  beforeRouteEnter(to, from, next) {
+    next((vm) => {
+      vm.$store.dispatch("activeTags");
+    });
+  },
   methods: {
     async build() {
       console.log("mounted", this.$route.query.tags);
       const tags = [];
-      const rowTags = this.$route.query.tags.split(",");
+      const rowTags = (this.$route.query.tags || "").split(",");
       rowTags.forEach((it) => {
         const tag = parseInt(it);
         if (!isNaN(tag) && this.tags[tag]) {
@@ -69,18 +67,17 @@ export default {
       });
       console.log("Uri tags", tags);
       if (tags.length != 0) {
-        tags.forEach((el) => {
+        +tags.forEach((el) => {
           this.active(el);
         });
       } else {
+        this.posts = await this.searchPosts({});
         console.log(
           "Uri tags wasnt defined",
           tags,
           this.tags.length,
-          this.posts.length
+          this.posts
         );
-
-        this.posts = this.searchPosts({});
       }
     },
     async searchPosts(query) {
@@ -89,9 +86,11 @@ export default {
     async active(tag) {
       this.$set(tag, "active", !tag.active);
       let search = { $and: [] };
-
       this.tags.forEach((it) => {
         if (it.active) {
+          if (process.client) {
+            console.log("location", this.$route.query.tags);
+          }
           search.$and.push({ tags: { $in: [it.id] } });
         }
       });

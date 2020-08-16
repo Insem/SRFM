@@ -44,8 +44,6 @@
   </div>
 </template>
 <script>
-import AppHeader from "~/components/page-parts/Header.vue";
-import AppFooter from "~/components/page-parts/Footer.vue";
 import BackgroundFigures from "~/components/page-parts/BackgroundFigures.vue";
 import LastNews from "~/components/LastNews.vue";
 import SmallPost from "~/components/news/SmallPost.vue";
@@ -74,6 +72,12 @@ export default {
         if (this.tags[i].id == id) return this.tags[i];
       }
     },
+  },
+
+  beforeRouteEnter(to, from, next) {
+    next((vm) => {
+      vm.$store.dispatch("activeMain");
+    });
   },
   async fetch() {
     console.log("tags", CONSTS.PATHS.GETTAGS);
@@ -108,8 +112,6 @@ export default {
     this.bigPosts = level;
   },
   components: {
-    AppFooter,
-    AppHeader,
     BackgroundFigures,
     LastNews,
     SmallPost,
