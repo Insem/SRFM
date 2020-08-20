@@ -1,9 +1,9 @@
 <template>
-  <div class="smallNews" :style="{width:post.width}">
+  <div class="smallNews" :class="post.name">
     <n-link :to="'/post?id='+news.id">
       <div
         class="img"
-        :style="{height:post.height, backgroundImage: `url(${news.mainImg.file.url})`}"
+        :style="{ backgroundImage: `url(${news.mainImg.file.url})`}"
         alt="Главная новость"
       ></div>
     </n-link>
@@ -14,12 +14,21 @@
         <Tag :tag="tag" :color="'black'" />
       </div>
       <n-link :to="'/post?id='+news.id">
-        <Title :text="news.header" :fontSize="post.fontSize" />
+        <Title :text="news.header" :fontClass="post.fontClass" />
       </n-link>
     </div>
   </div>
 </template>
 <style lang="scss">
+@import "~/assets/css/vars.scss";
+
+.PagePost {
+  width: 100%;
+}
+.PagePost .img {
+  height: 485px;
+}
+
 .smallNews .img {
   width: 100%;
   background-position: center;
@@ -34,13 +43,77 @@
     justify-content: start;
     flex-direction: column;
     margin-top: 15px;
-
+    .newsAttr * {
+      //fix
+    }
     .newsAttr {
       display: flex;
+      flex-wrap: wrap;
       justify-content: start;
-      flex-direction: row;
       margin-bottom: 10px;
+      flex-direction: row;
     }
+  }
+}
+@media (min-width: $lg) {
+  .smallNews .largeFont {
+    font-size: 64px;
+  }
+  .smallNews .smallFont {
+    font-size: 30px;
+  }
+  .MainPost {
+    width: 870px;
+  }
+  .MainPost .img {
+    height: 500px;
+  }
+
+  .SmallPost {
+    width: 350px;
+  }
+  .SmallPost .img {
+    height: 275px;
+  }
+
+  .SquarePost {
+    width: 815px;
+  }
+  .SquarePost .img {
+    height: 730px;
+  }
+}
+@media (min-width: $md) and (max-width: $lg) {
+  .smallNews .largeFont {
+    font-size: 56px;
+  }
+  .smallNews .smallFont {
+    font-size: 30px;
+  }
+  .SquarePost {
+    max-width: 815px;
+    width: 63vw;
+  }
+  .SquarePost .img {
+    max-height: 730px;
+    height: 68vw;
+  }
+
+  .SmallPost {
+    max-width: 350px;
+    width: 30vw;
+  }
+  .SmallPost .img {
+    height: 275px;
+  }
+
+  .MainPost {
+    max-width: 870px;
+    width: 100%;
+  }
+  .MainPost .img {
+    max-height: 500px;
+    height: 38vw;
   }
 }
 </style>
@@ -55,10 +128,30 @@ export default {
     return {
       post: null,
       types: [
-        { name: "SmallPost", width: "350px", height: "275px", fontSize: 30 },
-        { name: "MainPost", width: "870px", height: "500px", fontSize: 64 },
-        { name: "PagePost", width: "100%", height: "485px", fontSize: 64 },
-        { name: "SquarePost", width: "815px", height: "730px", fontSize: 64 },
+        {
+          name: "SmallPost",
+          width: "350px",
+          height: "275px",
+          fontClass: "smallFont",
+        },
+        {
+          name: "MainPost",
+          width: "870px",
+          height: "500px",
+          fontClass: "largeFont",
+        },
+        {
+          name: "PagePost",
+          width: "100%",
+          height: "485px",
+          fontClass: "largeFont",
+        },
+        {
+          name: "SquarePost",
+          width: "815px",
+          height: "730px",
+          fontClass: "largeFont",
+        },
       ],
     };
   },

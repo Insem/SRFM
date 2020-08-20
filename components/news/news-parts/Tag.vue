@@ -7,6 +7,9 @@
   </router-link>
 </template>
 <style lang="scss">
+@import "~/assets/css/vars.scss";
+@media (min-width: $md) and (max-width: $lg) {
+}
 .tag {
   display: flex;
   flex-direction: row;

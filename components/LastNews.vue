@@ -2,7 +2,7 @@
   <div class="news">
     <h2>Последнее</h2>
     <div class="cont" v-for="post in last" v-bind:key="post.id">
-      <div class="block">
+      <n-link :to="'/post?id='+post.id" class="block">
         <h3>
           {{post.header}}
           <!--<div class="arr">
@@ -11,7 +11,7 @@
             </div>
           </div>-->
         </h3>
-      </div>
+      </n-link>
       <div class="date">
         <h4>
           <img src="~/assets/img/svg/clock.svg" alt="Время публикации" />
@@ -43,6 +43,7 @@ export default {
   width: 300px;
   background-color: #0c0c0c;
   color: white;
+  margin-left: 30px;
   padding-right: 8px !important;
   padding: 20px;
 

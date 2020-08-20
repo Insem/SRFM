@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container" v-if="postData.mainImg">
     <div class="post_content">
       <Post-Img :src="postData.mainImg.file.url" :source="postData.mainImg.caption" />
       <div class="newsAttr">
@@ -68,9 +68,7 @@ export default {
       vm.$store.dispatch("randPost");
     });
   },
-  beforeMount() {
-    console.log("this", this.postData);
-  },
+
   async fetch() {
     console.log("ctxx");
     //this.$parent.$root.context.redirect("/404");

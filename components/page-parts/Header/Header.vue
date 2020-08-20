@@ -1,5 +1,5 @@
 <template>
-  <header class="red">
+  <header class="container">
     <Logo />
     <div class="menu">
       <div class="elem" v-for="(menu,index) in $store.state.menuArr" v-bind:key="index">
@@ -10,7 +10,7 @@
       </div>
     </div>
     <div
-      class="search"
+      class="search none_sm none_xs"
       v-tooltip.auto-start="{content:'Простите, этот раздел придумали дийзайнеры, <br>я ничего не могу с этим поделать :(', offset:5}"
     >
       <img src="~/assets/img/svg/search.svg" />Поиск

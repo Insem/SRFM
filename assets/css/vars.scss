@@ -1,13 +1,9 @@
-$width_lg:100%;
 $header_height:60px;
-/*@font-face {
-    font-family:'Messapia';
-    font-style: normal;
-    font-weight: 800;
-    src: url("~../assets/fonts/messapia/Messapia-Bold.woff2") format('woff2'); 
-}*/
-$inter:'Inter',
-sans-serif;
-$mesapia:'messapia';
+$font:'Inter';
 
 $main_mg-top:105px;
+
+$lg : 1250px;
+$md : 992px;
+$sm: 768px;
+$xs: 576px;

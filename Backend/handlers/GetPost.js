@@ -8,22 +8,25 @@ function getPost(req, res) {
   get_from_db(req.body)
     .then((doc) => {
       res.status(200);
-      console.log('User got post. Id: ', doc.id);
+      console.log('User got posts ', doc.length);
       res.end(JSON.stringify(doc));
     })
     .catch((e) => {
       console.log('Error happened with getting post.', e);
       res.status(500);
-      res.end('Error');
+      res.end(JSON.stringify(e));
     });
 }
 
 function get_from_db(post) {
-  return new Promise(function (resolve, reject) {
+  return new Promise(async function (resolve, reject) {
 
-    mongoose.connect(CONSTS.DB.CONNECT, {
+    await mongoose.connect(CONSTS.DB.CONNECT, {
       useNewUrlParser: true,
       useUnifiedTopology: true
+    }).catch(function (e) {
+      console.log('RandomPost error 14', e);
+      reject(e);
     });
 
     console.log('Find post', JSON.stringify(post));

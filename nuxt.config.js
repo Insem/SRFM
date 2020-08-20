@@ -22,7 +22,7 @@ module.exports = {
     }]
   },
   css: [{
-    src: "~/assets/css/global.scss",
+    src: "~/assets/css/global/global.scss",
     lang: "scss"
   }],
   buildModules: [

@@ -1,12 +1,12 @@
-<template>
-  <div class="container">
+<template >
+  <div class="container" v-if="bigPosts.up">
     <div class="backgrounFigure">
-      <Background-Figures />
+      <Background-Figures :class="'none_sm'" />
     </div>
     <div class="face_block">
       <Small-Post :tag="getTagById(bigPosts.up.tags[0])" :news="bigPosts.up" :type="'MainPost'" />
       <div>
-        <Last-News :tags="tags" :last="posts.slice(0,5)" />
+        <Last-News :tags="tags" :class="'none_sm'" :last="posts.slice(0,5)" />
       </div>
     </div>
     <div class="smallNews_block">
@@ -80,12 +80,16 @@ export default {
     });
   },
   async fetch() {
-    console.log("tags", CONSTS.PATHS.GETTAGS);
     this.tags = await Api.GetReq(CONSTS.PATHS.GETTAGS, {});
     this.posts = await Api.GetReq(CONSTS.PATHS.GETPOST, { level: 3 });
 
     let mainTag = this.tags.filter((it) => it.type == 1)[0];
-    console.log("Tag", mainTag);
+    console.log(
+      "Main tag, tags, path",
+      mainTag,
+      this.tags,
+      CONSTS.PATHS.GETTAGS
+    );
 
     this.posts.forEach((it) => {
       if (it.tags.indexOf(mainTag.id) != -1) {

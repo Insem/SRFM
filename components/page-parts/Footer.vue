@@ -1,7 +1,7 @@
 <template>
-  <footer>
+  <footer class="container">
     <Logo />
-    <div class="author">
+    <div>
       <a href="mailto:600amper@gmail.com?subject=СРОМ">600amper@gmail.com</a>
       <h4>- по всем вопросам</h4>
     </div>
@@ -52,7 +52,7 @@ import Subscribe from "./Subscribe.vue";
 export default {
   components: {
     Logo,
-    Subscribe
-  }
+    Subscribe,
+  },
 };
 </script>

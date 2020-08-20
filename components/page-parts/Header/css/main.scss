@@ -1,15 +1,16 @@
 @import "~/assets/css/vars.scss";
+@import "~/components/page-parts/Header/css/media/sm.scss";
+@import "~/components/page-parts/Header/css/media/md-lg.scss";
 
 header {
   //position: relative;
   //background: url("/fon_bw.png") no-repeat 0% 40%;
   //background-size: cover;
-  font-family: $inter;
+  font-family: $font;
   width: 100%;
   height: $header_height;
   display: flex;
   align-items: center;
-  justify-content: space-between;
   flex-direction: row;
   margin-top: 55px;
 
@@ -48,7 +49,7 @@ header {
 
   .search {
     color: white;
-    font-family: $inter;
+    font-family: $font;
     display: flex;
     justify-content: center;
     flex-direction: row;

@@ -1,9 +1,6 @@
 <template>
   <div class="newsTitle">
-    <h4 :style="{fontSize:fontSize+'px'}">
-      {{text}}
-      <!--<img src="~/../../assets/img/svg/news_arr.svg" alt="Время публикации" />-->
-    </h4>
+    <h4 :class="fontClass">{{text}}</h4>
   </div>
 </template>
 <style lang="scss">
@@ -29,8 +26,8 @@
 <script>
 export default {
   props: {
-    fontSize: Number,
-    text: String
-  }
+    fontClass: String,
+    text: String,
+  },
 };
 </script>

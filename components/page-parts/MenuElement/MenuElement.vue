@@ -10,7 +10,7 @@
             start:!menu.start
           }"
         >
-          <n-link :to="menu.path">
+          <n-link :to="menu.path" :prefetch="true">
             <div class="text">{{ menu.text }}</div>
           </n-link>
         </div>

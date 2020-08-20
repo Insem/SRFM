@@ -8,33 +8,37 @@ function getRandPost(req, res) {
   get_from_db()
     .then((doc) => {
       res.status(200);
-      console.log('User got post. Id: ', doc);
+      console.log('User got rand post. Id: ', doc);
       res.end(JSON.stringify(doc));
     })
     .catch((e) => {
-      console.log('Error happened with getting post.', e);
+      console.log('Error happened with getting rand post.', e);
       res.status(500);
-      res.end('Error');
+      res.end(JSON.stringify(e));
     });
 }
 
 function get_from_db() {
   return new Promise(async function (resolve, reject) {
 
-    mongoose.connect(CONSTS.DB.CONNECT, {
+    await mongoose.connect(CONSTS.DB.CONNECT, {
       useNewUrlParser: true,
       useUnifiedTopology: true
+    }).catch(function (e) {
+      console.log('RandomPost error 14', e);
+      reject(e);
     });
 
     const count = await Schemas.post.countDocuments().catch(function (e) {
-      console.log('RandomPost error', e);
+      console.log('RandomPost error 1', e);
       reject(e);
     });
-    let post = await Schemas.post.findOne().skip(randomInt(1, count)).catch(function (e) {
-      console.log('RandomPost error', e);
+    const post = await Schemas.post.findOne().exec().catch(function (e) {
+      console.log('RandomPost error 2', e);
       reject(e);
     });
     console.log('Rand post count, id', count, post.id);
+    mongoose.disconnect();
     resolve(post.id);
   })
 }
