@@ -1,4 +1,5 @@
 @import "~/assets/css/vars.scss";
+@import "~/pages/main/css/xs.scss";
 
 .container {
   .smallNews_block {
@@ -16,7 +17,6 @@
 
   .face_block {
     z-index: 5;
-    margin-top: $main_mg-top;
     position: relative;
     display: flex;
     flex-direction: row;
@@ -38,7 +38,6 @@
         font-family: Inter;
         font-style: normal;
         font-weight: 900;
-        font-size: 42px;
         line-height: 120.5%;
         color: #ffffff;
       }
@@ -53,7 +52,6 @@
       .left {
         display: flex;
         justify-content: space-between;
-        flex-direction: column;
       }
 
       .left:first-child>div {
@@ -66,5 +64,39 @@
 .backgrounFigure {
   position: absolute;
   top: 140px;
+
+  @media (min-width: 0) and (max-width:$sm) {
+    .container .face_block {
+      margin-top: 45px;
+    }
+
+    .category_news .news_block .left>div {
+      margin-right: 45px;
+    }
+  }
+
   right: -300px;
+}
+
+@media (min-width: $md) {
+  .category_news .news_block .left {
+    flex-direction: column;
+  }
+}
+
+@media (min-width: $sm) {
+  .container .category_news .head h1 {
+    font-size: 42px;
+  }
+
+  .container .face_block {
+    margin-top: 105px;
+  }
+}
+
+
+@media (min-width: $sm) and (max-width:$md) {
+  .category_news .news_block .left {
+    flex-direction: row;
+  }
 }

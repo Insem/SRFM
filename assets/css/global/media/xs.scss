@@ -1,0 +1,9 @@
+@media (min-width: 0) and (max-width:$sm) {
+  .container {
+    width: 100%;
+  }
+
+  .none_xs {
+    display: none !important;
+  }
+}

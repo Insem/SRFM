@@ -83,8 +83,7 @@ export default {
       const Header = require("@editorjs/header");
       const Embed = require("@editorjs/embed");
       const Personality = require("@editorjs/personality");
-
-      console.log(EditorJS);
+      const InlineCode = require("@editorjs/inline-code");
       const editor = new EditorJS({
         holder: "editorjs",
         tools: {
@@ -95,6 +94,9 @@ export default {
               descriptionPlaceholder: "О персонаже",
               linkPlaceholder: "Сюда ничего не пишите",
             },
+          },
+          inlineCode: {
+            class: InlineCode,
           },
           quote: { class: Quote, shortcut: "SHIFT+O" },
           image: {

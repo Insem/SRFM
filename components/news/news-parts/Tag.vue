@@ -1,6 +1,7 @@
 <template>
   <router-link :to="'/post-navigation?tags='+tag.id">
-    <div class="tag" :style="{backgroundColor:color}">
+    <div class="tag">
+      <span>#</span>
       <h3>{{tag.val}}</h3>
       <img src="~/assets/img/svg/tag_arr.svg" alt="Перейти" />
     </div>
@@ -8,13 +9,36 @@
 </template>
 <style lang="scss">
 @import "~/assets/css/vars.scss";
-@media (min-width: $md) and (max-width: $lg) {
+@media (min-width: $sm) {
+  .tag {
+    background-color: #000;
+    color: #ffffff;
+
+    margin-right: 3px;
+    padding: 10px;
+  }
+  .tag span {
+    display: none;
+  }
+}
+@media (min-width: 0) and (max-width: $sm) {
+  .tag {
+    color: rgb(148, 148, 148);
+  }
+  .tag img {
+    display: none;
+  }
+  .tag span {
+    margin-right: 3px;
+    font-size: 20px;
+    font-weight: bold;
+    color: #98393f;
+  }
 }
 .tag {
   display: flex;
   flex-direction: row;
   align-items: center;
-  padding: 10px;
 
   h3 {
     font-family: Inter;
@@ -22,7 +46,6 @@
     font-weight: 500;
     font-size: 14px;
     line-height: 120.5%;
-    color: #ffffff;
   }
   img {
     margin-left: 10px;

@@ -1,0 +1,26 @@
+@media (min-width: 0) and (max-width:$sm) {
+  .container .face_block {
+    margin-top: 45px;
+  }
+
+  .category_news .news_block {
+    overflow-x: auto;
+
+  }
+
+  .container .category_news .head h1 {
+    font-size: 26px;
+  }
+
+  .category_news .news_block::-webkit-scrollbar {
+    display: none;
+  }
+
+  .category_news .news_block .left {
+    width: 900px
+  }
+
+  .category_news .news_block .left>div {
+    margin-right: 45px;
+  }
+}

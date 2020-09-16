@@ -1,0 +1,33 @@
+@media (min-width: $lg) {
+  .smallNews .largeFont {
+    font-size: 64px;
+  }
+
+  .smallNews .smallFont {
+    font-size: 30px;
+  }
+
+  .MainPost {
+    width: 870px;
+  }
+
+  .MainPost .img {
+    height: 500px;
+  }
+
+  .SmallPost {
+    width: 350px;
+  }
+
+  .SmallPost .img {
+    height: 275px;
+  }
+
+  .SquarePost {
+    width: 815px;
+  }
+
+  .SquarePost .img {
+    height: 730px;
+  }
+}

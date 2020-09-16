@@ -5,6 +5,7 @@
   </div>
 </template>
 <style lang="scss">
+@import "~/assets/css/vars.scss";
 .subscribe {
   display: flex;
   justify-content: center;
@@ -55,7 +56,7 @@
 <script>
 export default {
   props: {
-    network: String
-  }
+    network: String,
+  },
 };
 </script>

@@ -1,11 +1,11 @@
 <template>
-  <div class="tag" :style="{backgroundColor:color}">
+  <div class="tagCat" :style="{backgroundColor:color}">
     <h3>{{count}} новости</h3>
     <img src="~/assets/img/svg/tag_arr.svg" alt="Перейти" />
   </div>
 </template>
 <style lang="scss">
-.tag {
+.tagCat {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -33,7 +33,7 @@
 export default {
   props: {
     count: Number,
-    color: String
-  }
+    color: String,
+  },
 };
 </script>

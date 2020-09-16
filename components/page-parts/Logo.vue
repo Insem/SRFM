@@ -17,8 +17,15 @@
     background-image: url("/img/logo/logo.svg");
   }
 }
+@media (min-width: 0) and (max-width: $sm) {
+  .logo .img {
+    width: 60px;
+    height: 54px;
+    background-image: url("/img/logo/logo-man.svg");
+  }
+}
 
-@media (min-width: 0) and (max-width: $md) {
+@media (min-width: $sm) and (max-width: $md) {
   .logo {
     margin-right: 100px;
   }

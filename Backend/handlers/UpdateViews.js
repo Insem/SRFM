@@ -4,7 +4,6 @@ const Schemas = require("../Schemas.js");
 
 
 function updateViews(req, res) {
-  console.log('Get post', req.body);
   update_db(req.body)
     .then((doc) => {
       res.status(200);
@@ -18,31 +17,40 @@ function updateViews(req, res) {
 }
 
 function update_db(query) {
-  return new Promise(async function (resolve, reject) {
+  return new Promise(function (resolve, reject) {
 
-    mongoose.connect(CONSTS.DB.CONNECT, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true
-    });
+    let connect = mongoose.connect(CONSTS.DB.CONNECT, {
+        useNewUrlParser: true
+      })
+      .then(() => {
+        console.log('Connection ok update views');
+      })
+      .catch(function (e) {
+        console.log('RandomPost error 14', e);
+        reject(e);
+      });
 
     let views = 0;
     console.log('begin');
-    await Schemas.post.findOne(query, function (err, doc) {
+    Schemas.post.findOne(query, function (err, doc) {
 
       if (err || !doc) return reject(err);
       views = doc.views + 1;
-      console.log('middle', doc.views, views);
-    });
+      console.log('middle++++++++++++++++++++++++++++++++++++++++++++++++', doc.views, views);
+    })
     console.log('Views Updated', views, query);
-    await Schemas.post.updateOne(query, {
+    Schemas.post.updateOne(query, {
         views: views
       },
       function (err, doc) {
-        console.log('final', err);
-        mongoose.disconnect();
+        //    
         if (err) return reject(err);
+        console.log('final--------------------------------------------------');
 
       });
+
+    connect.close();
+    console.log('vefore disconnect');
     resolve(views);
   })
 }

@@ -32,7 +32,7 @@
 <script>
 import Api from "~/assets/js/api/fetch.js";
 import parsePost from "~/assets/js/write-post/parsePosts.js";
-import SmallPost from "~/components/news/SmallPost.vue";
+import SmallPost from "~/components/news/PreviewPost/PreviewPost.vue";
 import Tag from "~/components/news/news-parts/Tag.vue";
 
 const api = Api.ApiPath;

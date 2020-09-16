@@ -4,7 +4,7 @@ const Schemas = require("../Schemas.js");
 
 
 function getPost(req, res) {
-  console.log('Get post', req.body);
+  console.log('Get post post', req.body);
   get_from_db(req.body)
     .then((doc) => {
       res.status(200);
@@ -19,15 +19,19 @@ function getPost(req, res) {
 }
 
 function get_from_db(post) {
-  return new Promise(async function (resolve, reject) {
+  return new Promise(function (resolve, reject) {
 
-    await mongoose.connect(CONSTS.DB.CONNECT, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true
-    }).catch(function (e) {
-      console.log('RandomPost error 14', e);
-      reject(e);
-    });
+    mongoose.connect(CONSTS.DB.CONNECT, {
+        useNewUrlParser: true,
+        useUnifiedTopology: true
+      })
+      .then(() => {
+        console.log('Connection ok');
+      })
+      .catch(function (e) {
+        console.log('RandomPost error 14', e);
+        reject(e);
+      });
 
     console.log('Find post', JSON.stringify(post));
     Schemas.post.find(post).sort({

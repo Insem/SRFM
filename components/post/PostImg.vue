@@ -8,11 +8,17 @@
 export default {
   props: {
     src: String,
-    source: String
-  }
+    source: String,
+  },
 };
 </script>
 <style lang="scss">
+@import "~/assets/css/vars.scss";
+@media (min-width: 0) and (max-width: $sm) {
+  .postImg {
+    margin-bottom: 30px;
+  }
+}
 .postImg {
   width: 100%;
 }

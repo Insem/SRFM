@@ -3,11 +3,11 @@ import Api from "~/assets/js/api/fetch.js";
 const CONSTS = require("~/assets/js/frontend.consts.js");
 export const getters = {
   // ...
-  randPostId: async function (state, getters) {
-    const id = await Api.GetReq(CONSTS.PATHS.GETRANDPOST, {});
-    console.log('rand')
-    return '/' + id;
-  }
+  /* randPostId: async function (state, getters) {
+     const id = await Api.GetReq(CONSTS.PATHS.GETRANDPOST, {});
+     console.log('rand')
+     return '/' + id;
+   }*/
 }
 export const state = () => ({
   menuArr: [{
@@ -68,7 +68,7 @@ export const actions = {
   async randPost({
     commit
   }) {
-    const id = await Api.GetReq(CONSTS.PATHS.GETRANDPOST, {});
-    commit('randPost', id);
+    //const id = await Api.GetReq(CONSTS.PATHS.GETRANDPOST, {});
+    commit('randPost', 'id');
   }
 };

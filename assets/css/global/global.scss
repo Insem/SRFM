@@ -3,6 +3,7 @@
 @import "~/assets/css/global/media/lg.scss";
 @import "~/assets/css/global/media/md.scss";
 @import "~/assets/css/global/media/sm.scss";
+@import "~/assets/css/global/media/xs.scss";
 
 .newsAttr {
   display: flex;
@@ -15,7 +16,7 @@ a {
 }
 
 a:visited {
-  color: none;
+  color: inherit;
 }
 
 .main_cont {
@@ -41,11 +42,6 @@ html {
   overflow-x: hidden !important;
 }
 
-@media (min-width: 0) and (max-width: $sm) {
-  .none_xs {
-    display: none !important;
-  }
-}
 
 @media (min-width: $sm) and (max-width: $md) {
   .none_sm {

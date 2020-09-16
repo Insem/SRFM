@@ -12,14 +12,15 @@
 <script>
 export default {
   props: {
-    text: String
-  }
+    text: String,
+  },
 };
 </script>
 <style lang="scss">
 .quote {
   padding: 20px 25px;
   margin-top: 35px;
+  margin-bottom: 30px;
   background-color: #333333;
   .qoute_right {
     display: flex;

@@ -1,0 +1,28 @@
+@media (min-width: $sm) {
+
+  .post_content {
+    margin-top: $main_mg-top;
+
+    h1 {
+      font-size: 64px;
+      margin-bottom: 70px;
+    }
+
+    .tag {
+
+      margin-right: 5px;
+
+    }
+
+    .newsAttr {
+      margin-top: 45px;
+    }
+
+    p,
+    h1,
+    .newsAttr {
+      padding-right: 25px;
+      padding-left: 40px;
+    }
+  }
+}

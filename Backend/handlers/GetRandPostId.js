@@ -4,7 +4,6 @@ const Schemas = require("../Schemas.js");
 
 
 function getRandPost(req, res) {
-  console.log('Get post', req.body);
   get_from_db()
     .then((doc) => {
       res.status(200);
@@ -24,6 +23,9 @@ function get_from_db() {
     await mongoose.connect(CONSTS.DB.CONNECT, {
       useNewUrlParser: true,
       useUnifiedTopology: true
+    }).
+    then(() => {
+      console.log('Connection ok');
     }).catch(function (e) {
       console.log('RandomPost error 14', e);
       reject(e);

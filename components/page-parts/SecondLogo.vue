@@ -5,18 +5,35 @@
   </div>
 </template>
 <style lang="scss">
+@import "~/assets/css/vars.scss";
+@media (min-width: 0) and (max-width: $md) {
+  .secondLogo {
+    height: 66px;
+    .logoImg {
+      height: 66px;
+      width: 73px;
+      background-size: contain;
+    }
+  }
+}
+@media (min-width: $md) {
+  .secondLogo {
+    height: 100%;
+    .logoImg {
+      height: 90px;
+      width: 100px;
+      top: -10px;
+    }
+  }
+}
 .secondLogo {
   position: relative;
   display: flex;
   justify-content: flex-start;
   flex-direction: row;
   align-items: center;
-  height: 100%;
   .logoImg {
     position: relative;
-    top: -10px;
-    height: 90px;
-    width: 100px;
     background-image: url("~assets/img/svg/second_logo.svg");
     background-repeat: no-repeat;
   }

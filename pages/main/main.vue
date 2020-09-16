@@ -1,17 +1,18 @@
 <template >
   <div class="container" v-if="bigPosts.up">
     <div class="backgrounFigure">
-      <Background-Figures :class="'none_sm'" />
+      <Background-Figures :class="'none_sm none_xs'" />
     </div>
     <div class="face_block">
-      <Small-Post :tag="getTagById(bigPosts.up.tags[0])" :news="bigPosts.up" :type="'MainPost'" />
+      <Preview-Post :tag="getTagById(bigPosts.up.tags[0])" :news="bigPosts.up" :type="'MainPost'" />
       <div>
-        <Last-News :tags="tags" :class="'none_sm'" :last="posts.slice(0,5)" />
+        <Last-News :tags="tags" :class="'none_sm none_xs'" :last="posts.slice(0,5)" />
       </div>
     </div>
-    <div class="smallNews_block">
-      <Small-Post
-        v-for="post in upPosts"
+    <div class="smallNews_block none_xs">
+      <Preview-Post
+        :class="{none_sm:index==2}"
+        v-for="(post,index) in upPosts"
         :key="post.id"
         :tag="getTagById(post.tags[0])"
         :news="post"
@@ -19,7 +20,11 @@
       />
     </div>
     <div class="pageNews_block">
-      <Small-Post :tag="getTagById(bigPosts.bot.tags[0])" :news="bigPosts.bot" :type="'PagePost'" />
+      <Preview-Post
+        :tag="getTagById(bigPosts.bot.tags[0])"
+        :news="bigPosts.bot"
+        :type="'PagePost'"
+      />
     </div>
     <div class="category_news">
       <div class="head">
@@ -28,7 +33,7 @@
       </div>
       <div class="news_block">
         <div class="left">
-          <Small-Post
+          <Preview-Post
             v-for="post in botPosts"
             :key="post.id"
             :tag="getTagById(post.tags[0])"
@@ -36,8 +41,8 @@
             :type="'SmallPost'"
           />
         </div>
-        <div class="right">
-          <Small-Post :tag="getTagById(0)" :news="squarePost" :type="'SquarePost'" />
+        <div class="right none_sm none_xs">
+          <Preview-Post :tag="getTagById(0)" :news="squarePost" :type="'SquarePost'" />
         </div>
       </div>
     </div>
@@ -46,7 +51,7 @@
 <script>
 import BackgroundFigures from "~/components/page-parts/BackgroundFigures.vue";
 import LastNews from "~/components/LastNews.vue";
-import SmallPost from "~/components/news/SmallPost.vue";
+import PreviewPost from "~/components/news/PreviewPost/PreviewPost.vue";
 import Tag from "~/components/news/news-parts/TagCategory.vue";
 
 import Api from "~/assets/js/api/fetch.js";
@@ -118,7 +123,7 @@ export default {
   components: {
     BackgroundFigures,
     LastNews,
-    SmallPost,
+    PreviewPost,
     Tag,
   },
 };

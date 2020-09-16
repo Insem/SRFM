@@ -5,12 +5,14 @@
       <div class="newsAttr">
         <Time :time="postData.time" />
         <Views :views="postData.views" />
-        <Tag v-for="tag in tags" :key="tag.id" :tag="tag" :color="'black'" />
+        <div class="postTags">
+          <Tag v-for="tag in tags" :key="tag.id" :tag="tag" :color="'black'" />
+        </div>
       </div>
 
       <h1>{{postData.header}}</h1>
       <template v-for="(block,i) in postData.blocks">
-        <p v-if="block.type == 'paragraph'" v-bind:key="i">{{block.data.text }}</p>
+        <p v-if="block.type == 'paragraph'" v-bind:key="i" v-html="block.data.text"></p>
         <Quote
           v-if="block.type == 'quote'"
           :text="block.data.text"
@@ -64,14 +66,12 @@ export default {
   beforeRouteEnter(to, from, next) {
     next((vm) => {
       vm.$store.dispatch("activePost");
-
-      vm.$store.dispatch("randPost");
     });
   },
-
+  created() {
+    Api.UpdateViews({ id: this.postData.id });
+  },
   async fetch() {
-    console.log("ctxx");
-    //this.$parent.$root.context.redirect("/404");
     const redirect = this.$nuxt.context.redirect;
     const data = (
       await Api.GetReq(
@@ -82,10 +82,8 @@ export default {
         redirect
       )
     )[0];
-    console.log("post daffffffffffffffffffffffffffffffffffffffffta", data);
     this.postData = data;
     this.tags = await Api.GetReq(CONSTS.PATHS.GETTAGS, {}, redirect);
-    await Api.UpdateViews({ id: this.postData.id });
   },
   components: {
     PostImg,
@@ -99,66 +97,5 @@ export default {
 };
 </script>
 <style lang="scss">
-@import "~/assets/css/vars.scss";
-$pd-left: 40px;
-$pd-right: 35px;
-
-.post_content {
-  margin-top: $main_mg-top;
-  padding: 0px 150px;
-  .tag {
-    margin-right: 5px;
-  }
-  .postAttr {
-    display: flex;
-    justify-content: center;
-    flex-direction: row;
-    margin-top: 70px;
-
-    .postAttr_block > div {
-      display: inline-flex !important;
-    }
-    .postAttr_block {
-      padding-bottom: 15px;
-      position: relative;
-    }
-    .postAttr_block:after {
-      content: "";
-      position: absolute;
-      width: 70%;
-      left: 15%;
-      height: 1px;
-      background-color: rgba(255, 255, 255, 0.1);
-      bottom: 0px;
-    }
-  }
-  h1 {
-    font-family: Inter;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 64px;
-    line-height: 120.5%;
-    color: #ffffff;
-    margin-top: 15px;
-    margin-bottom: 70px;
-    padding-left: $pd-left;
-    padding-right: $pd-right;
-  }
-  p {
-    font-family: Inter;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 17px;
-    line-height: 152%;
-    color: #ffffff;
-    padding-left: $pd-left;
-    padding-right: $pd-right;
-    margin-bottom: 25px;
-  }
-}
-.post_content .newsAttr {
-  margin-top: 45px;
-  padding-left: $pd-left;
-  padding-right: $pd-right;
-}
+@import "~/pages/post/css/main.scss";
 </style>
