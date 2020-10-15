@@ -1,0 +1,43 @@
+@import "~/assets/css/vars.scss";
+@import "~/components/news/PreviewPost/css/media/sm-md.scss";
+@import "~/components/news/PreviewPost/css/media/lg.scss";
+@import "~/components/news/PreviewPost/css/media/md.scss";
+@import "~/components/news/PreviewPost/css/media/xs.scss";
+@import "~/components/news/PreviewPost/css/media/xs-lg.scss";
+
+
+.PagePost {
+  width: 100%;
+}
+
+
+.smallNews .img {
+  width: 100%;
+  background-position: center;
+  background-size: cover;
+}
+
+.smallNews {
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+
+  .newsCont {
+    display: flex;
+    justify-content: start;
+    flex-direction: column;
+    margin-top: 15px;
+
+    .newsAttr * {
+      //fix
+    }
+
+    .newsAttr {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-start;
+      margin-bottom: 10px;
+      flex-direction: row;
+    }
+  }
+}

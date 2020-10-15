@@ -1,0 +1,20 @@
+# dependencies
+node_modules
+
+# logs
+npm-debug.log
+
+# Nuxt build
+.nuxt
+
+# Nuxt generate
+dist
+
+#SRFM logs
+/Backend/logs/*
+/Backend/node_modules
+
+Backend/auth.json
+/Backend/*.key
+/Backend/*.crt
+/.vscode

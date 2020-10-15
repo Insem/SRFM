@@ -1,0 +1,17 @@
+@media (min-width: $sm) {
+  .tags {
+    .posts {
+      justify-content: space-between;
+    }
+
+    .tag_content {
+      justify-content: center;
+
+      .tag {
+        margin-right: 10px;
+      }
+    }
+
+    .posts>div {}
+  }
+}

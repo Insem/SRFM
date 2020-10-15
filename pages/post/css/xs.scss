@@ -1,0 +1,35 @@
+@media (min-width: 0) and (max-width:$sm) {
+
+
+  .post_content {
+    padding: 0px 0px;
+    margin-top: 45px;
+
+    h1 {
+      font-size: 45px;
+      margin-bottom: 40px;
+    }
+
+    .tag {
+      margin-right: 10px;
+    }
+
+    .newsAttr {
+      flex-wrap: wrap;
+      margin-top: 20px;
+
+      .postTags,
+      .date,
+      .views {
+        margin-top: 10px;
+      }
+    }
+
+    p,
+    h1,
+    .newsAttr {
+      padding-right: 0px;
+      padding-left: 0px;
+    }
+  }
+}

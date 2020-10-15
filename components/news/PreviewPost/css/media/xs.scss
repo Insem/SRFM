@@ -1,0 +1,43 @@
+@media (min-width: 0) and (max-width: $sm) {
+  .smallNews .largeFont {
+    font-size: 36px;
+  }
+
+  .smallNews .smallFont {
+    font-size: 30px;
+  }
+
+  .PagePost .img {
+    height: 50vw;
+  }
+
+  .SquarePost {
+    max-width: 815px;
+    width: 63vw;
+  }
+
+  .SquarePost .img {
+    max-height: 730px;
+    height: 68vw;
+  }
+
+  .SmallPost {
+    max-width: 350px;
+    width: 360px;
+  }
+
+  .SmallPost .img {
+    height: 232px;
+  }
+
+  .MainPost {
+    max-width: 870px;
+    width: 100%;
+  }
+
+  .MainPost .img {
+    max-height: 500px;
+    height: 50vw;
+  }
+
+}

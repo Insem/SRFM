@@ -1,0 +1,19 @@
+@media (min-width: 0) and (max-width:$sm) {
+  .tags {
+    .posts {
+      justify-content: center;
+    }
+
+    .tag_content {
+      justify-content: flex-start;
+
+      .tag {
+        margin-right: 15px;
+      }
+    }
+
+    .posts>div {
+      margin-right: 0px;
+    }
+  }
+}

@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+Disallow: /404
+Sitemap: https://xn-----6kckmc0cckgeczcte.org/sitemap.xml
