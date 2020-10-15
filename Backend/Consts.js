@@ -44,7 +44,7 @@ const CONSTS = {
       return "SRFM";
     },
     get PORT() {
-      return "27017";
+      return config.dbPort;
     },
     get CONNECT() {
       return "mongodb://" + this.SERVER + ":" + this.PORT + "/" + this.NAME;
