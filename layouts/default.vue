@@ -1,42 +1,6 @@
 <template>
-  <div class="main_cont">
-    <!-- Yandex.Metrika counter -->
-    <script type="text/javascript">
-      (function (m, e, t, r, i, k, a) {
-        m[i] =
-          m[i] ||
-          function () {
-            (m[i].a = m[i].a || []).push(arguments);
-          };
-        m[i].l = 1 * new Date();
-        (k = e.createElement(t)),
-          (a = e.getElementsByTagName(t)[0]),
-          (k.async = 1),
-          (k.src = r),
-          a.parentNode.insertBefore(k, a);
-      })(
-        window,
-        document,
-        "script",
-        "https://mc.yandex.ru/metrika/tag.js",
-        "ym"
-      );
-
-      ym(68262538, "init", {
-        clickmap: true,
-        trackLinks: true,
-        accurateTrackBounce: true,
-      });
-    </script>
-    <noscript
-      ><div>
-        <img
-          src="https://mc.yandex.ru/watch/68262538"
-          style="position: absolute; left: -9999px"
-          alt=""
-        /></div
-    ></noscript>
-    <!-- /Yandex.Metrika counter -->
+  <div class="main_cont" >
+    <div v-html="metrika"></div>
     <App-Header />
     <nuxt v-cloak :key="$route.fullPath" keep-alive />
     <App-Footer />
@@ -46,6 +10,21 @@
 import AppHeader from "~/components/page-parts/Header/Header.vue";
 import AppFooter from "~/components/page-parts/Footer.vue";
 export default {
+  data(){
+   return { metrika:`<!-- Yandex.Metrika counter -->
+<script type="text/javascript" >
+   (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+   m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+   (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+   ym(68262538, "init", {
+        clickmap:true,
+        trackLinks:true,
+        accurateTrackBounce:true
+   });
+<\/script\>
+<noscript><div><img src="https://mc.yandex.ru/watch/68262538" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->`}
+  },
   mounted() {
     this.$nextTick(() => {
       this.$nuxt.$loading.start();

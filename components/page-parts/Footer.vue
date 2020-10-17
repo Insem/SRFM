@@ -2,7 +2,7 @@
   <footer class="container">
     <Logo />
     <div class="email">
-      <a href="mailto:600amper@gmail.com?subject=СРОМ">600amper@gmail.com</a>
+      <a href="mailto:savefromments@gmail.com?subject=СРОМ">savefromments@gmail.com</a>
       <h4 class="none_xs none_sm">&ensp;-&ensp;</h4>
       <h4>по всем вопросам</h4>
     </div>

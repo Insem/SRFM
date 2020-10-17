@@ -7,7 +7,7 @@
     "srfm-dev-server": "node dev-server.js",
     "srfm-server": "node server.js"
   },
-  "author": "600amper@gmail.com",
+  "author": "savefromments@gmail.com",
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.19.0",

@@ -17,7 +17,7 @@
         <br />
         <br />
         <br />
-        По всем вопросам: 600amper@gmail.com
+        По всем вопросам: savefromments@gmail.com
       </p>
     </div>
   </div>
