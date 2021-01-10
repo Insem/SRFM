@@ -5,6 +5,7 @@ export default {
     return `${CONSTS.SERVER.PROTOCOL}://${CONSTS.SERVER.HOST}:${CONSTS.SERVER.PORT}`;
   },
   async GetReq(path, data, redirect) {
+    console.log('GetReq', path, data);
     let res = await fetch(this.ApiPath + path, {
       method: "POST",
       body: JSON.stringify(data),

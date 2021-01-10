@@ -1,4 +1,4 @@
-<template >
+<template>
   <div class="container" :class="{ load: !bigPosts.up }" v-if="bigPosts.up">
     <div class="backgrounFigure">
       <Background-Figures :class="'none_sm none_xs'" />
@@ -79,8 +79,8 @@ export default {
       posts: [],
       mainCategory: {
         count: 0,
-        val: String,
-      },
+        val: String
+      }
     };
   },
 
@@ -89,57 +89,67 @@ export default {
       for (let i = 0; i < this.tags.length; i++) {
         if (this.tags[i].id == id) return this.tags[i];
       }
-    },
+    }
   },
 
   beforeRouteEnter(to, from, next) {
-    next((vm) => {
+    next(vm => {
       vm.$store.dispatch("activeMain");
     });
   },
   async fetch() {
-    this.tags = await Api.GetReq(CONSTS.PATHS.GETTAGS, {});
-    this.posts = await Api.GetReq(CONSTS.PATHS.GETPOST, { level: 3 });
+    //make all awaits  in promise
 
-    let mainTag = this.tags.filter((it) => it.type == 1)[0];
-    console.log(
-      "Main tag, tags, path",
-      mainTag,
-      this.tags,
-      CONSTS.PATHS.GETTAGS
-    );
-
-    this.posts.forEach((it) => {
-      if (it.tags.indexOf(mainTag.id) != -1 && it.level != 1) {
-        if (this.botPosts.length != 3) {
-          console.log("Bot posts");
-          this.botPosts.push(it);
-        }
-        this.mainCategory.count++;
-      } else if (this.upPosts.length != 3) this.upPosts.push(it);
+    //this.tags = await Api.GetReq(CONSTS.PATHS.GETTAGS, {});
+    const PostsPromise = Api.GetReq(CONSTS.PATHS.GETPOST, { level: 3 });
+    const TagsPromise = Api.GetReq(CONSTS.PATHS.GETTAGS, {});
+    //this.posts = await Api.GetReq(CONSTS.PATHS.GETPOST, { level: 3 });
+    TagsPromise.then(tags => {
+      this.tags = tags;
+      const mainTag = this.tags.filter(it => it.type == 1)[0];
+      PostsPromise.then(posts => {
+        this.posts = posts;
+        this.posts.forEach(it => {
+          if (it.tags.indexOf(mainTag.id) != -1 && it.level != 1) {
+            if (this.botPosts.length != 3) {
+              this.botPosts.push(it);
+            }
+            this.mainCategory.count++;
+          } else if (this.upPosts.length != 3) this.upPosts.push(it);
+        });
+        this.mainCategory.val = mainTag.val;
+        this.squarePost = this.botPosts.splice(0, 1)[0];
+      });
     });
-    this.mainCategory.val = mainTag.val;
-    this.squarePost = this.botPosts.splice(0, 1)[0];
-    console.log("Squarepost", this.getTagById(this.squarePost.tags[0]));
+    const GetMainPosts = Api.GetReq(CONSTS.PATHS.GETPOST, {
+      $or: [{ level: 1 }, { level: 2 }]
+    });
+  GetMainPosts.then((posts)=>{
+    const level = new Level();
 
-    const level = {};
-    (
-      await Api.GetReq(CONSTS.PATHS.GETPOST, {
-        $or: [{ level: 1 }, { level: 2 }],
-      })
-    ).forEach((it) => {
-      if (it.level == 1) level.up = it;
-      else if (it.level == 2) level.bot = it;
+    posts.forEach(it => {
+      if (it.level == 1) level.setUp(it);
+      else if (it.level == 2) level.setBot(it);
     });
     this.bigPosts = level;
+  });
+
   },
   components: {
     BackgroundFigures,
     LastNews,
     PreviewPost,
-    Tag,
-  },
+    Tag
+  }
 };
+class Level {
+  setBot(bot){
+    this.bot = bot;
+  }
+  setUp(up){
+    this.up = up;
+  }
+}
 </script>
 <style lang="scss">
 @import "~/pages/main/css/main.scss";
